@@ -1,0 +1,20 @@
+%h5
+  New Request
+  %br/
+  %br/
+  = form_tag("/users/new_request", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
+    Type of medicine
+    %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
+      %option{:value => ""}Select
+      %option{:value => "1"} Antibiotics
+      %option{:value => "2"} Pathogens
+      %option{:value => "3"} Antipyretics
+      %option{:value => "4"} Analgesics
+      %option{:value => "5"} Tranquilizer
+      %option{:value => "6"} Antiseptics
+    %br/
+    %br/
+    Upload Prescription
+    %input{type: "file", name: "prescrption"}
+    = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+    
