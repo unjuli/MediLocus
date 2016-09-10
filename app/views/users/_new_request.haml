@@ -6,15 +6,21 @@
     Type of medicine
     %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
       %option{:value => ""}Select
-      %option{:value => "1"} Antibiotics
-      %option{:value => "2"} Pathogens
-      %option{:value => "3"} Antipyretics
-      %option{:value => "4"} Analgesics
-      %option{:value => "5"} Tranquilizer
-      %option{:value => "6"} Antiseptics
+      %option{:value => 1} Antibiotics
+      %option{:value => 2} Pathogens
+      %option{:value => 3} Antipyretics
+      %option{:value => 4} Analgesics
+      %option{:value => 5} Tranquilizer
+      %option{:value => 6} Antiseptics
+    %br/
+    %br/
+    More details 
+    %input{:name => "details"}
     %br/
     %br/
     Upload Prescription
-    %input{type: "file", name: "prescrption"}
+    %input{type: "file", name: "prescription", :required => ""}
     = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+
+
     

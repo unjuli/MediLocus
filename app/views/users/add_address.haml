@@ -1,0 +1,8 @@
+- if @nil_address = 1
+  %h5 Please add your address before continuing
+= form_tag("/users/add_address", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
+  Address
+  %input{type: "text", name: "address"}
+  %br/
+  %br/
+  = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'

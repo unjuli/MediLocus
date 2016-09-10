@@ -10,7 +10,13 @@ class Request < ActiveRecord::Base
     tranquilizer: 5,
     antiseptics: 6
   }
+  MEDICINE_TYPE_INVERT = MEDICINE_TYPE.invert
 
   def self.add_new_request(params, current_user)
+    file = params["prescription"].tempfile
+    p = Prescription.create(user_id: current_user.id, file_name: file)
+    r = Request.create(user_id: current_user.id, medicine_type: params["medicine"], medicine_detail: params["details"])
+    p.update(request_id: r.id)
+    r.update(prescription_id: p.id)
   end
 end
