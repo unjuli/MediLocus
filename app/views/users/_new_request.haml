@@ -1,38 +1,45 @@
 %h5
   New Request
   %br/
-  %br/
-  = form_tag("/users/new_request", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
-    Type of medicine
-    %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
-      %option{:value => ""}Select
-      %option{:value => 1} Antibiotics
-      %option{:value => 2} Pathogens
-      %option{:value => 3} Antipyretics
-      %option{:value => 4} Analgesics
-      %option{:value => 5} Tranquilizer
-      %option{:value => 6} Antiseptics
-    %br/
-    %br/
-    More details 
-    %input{:name => "details"}
-    %br/
-    %br/
-    Upload Prescription
-    %br/
-    %br/
-    %input{type: "file", name: "prescription", :required => ""}
-    %br/
+  .row
+    .col-md-6.col-md-offset-3
+      %br/
+      = form_tag("/users/new_request", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
+        Type of medicine
+        %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
+          %option{:value => ""}Select
+          %option{:value => 1} Antibiotics
+          %option{:value => 2} Pathogens
+          %option{:value => 3} Antipyretics
+          %option{:value => 4} Analgesics
+          %option{:value => 5} Tranquilizer
+          %option{:value => 6} Antiseptics
+        %br/
+        %br/
+        More details 
+        %textarea{:cols => "50", :rows => "4"}
+          :preserve
+        %br/
+        %br/
+        Upload Prescription
+        %br/
+        %br/
+        %input{type: "file", name: "prescription", :required => ""}
+        %br/
 
-    / - if current_user.address.blank?
-    /   %h5 
-    /     Please add your address before continuing
-    /     %br/
-    /     Address
-    /     %input{type: "text", name: "address"}
-    /     %br/
-    /     %br/
-    = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+        - if current_user.address.blank?
+          %h5 
+            Please add your address before continuing
+            %br/
+            Address
+            %input{type: "text", name: "address"}
+            %br/
+            %br/
+        = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+
+    %br
+    %br
+    %br
 
 - i = 1
 - if @requests.present?
@@ -62,8 +69,5 @@
           = (Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude], [r.user.latitude, r.user.longitude])).round(2)
           km away
         %td
-
-      - i +=1
-
 
     
