@@ -5,4 +5,4 @@ development:
   database: hackathon
   #database: cancelimp
   pool: 5
-  username: root 
+  username: root
