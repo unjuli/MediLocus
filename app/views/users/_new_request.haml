@@ -69,5 +69,13 @@
           = (Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude], [r.user.latitude, r.user.longitude])).round(2)
           km away
         %td
+          %form{:action => "/", :method => "get"}
+            %input{:type => "hidden", :name => "status",:value => "approve"}
+            %input.btn.btn-success.stop{:type => "submit", :value => "Approve"} 
+        
+          %form{:action => "/", :method => "post"}
+            %input{:type => "hidden", :name => "status",:value => "reject"}
+            %input.btn.btn-danger.stop{:type => "submit", :value => "Reject"}
+      - i += 1
 
     
