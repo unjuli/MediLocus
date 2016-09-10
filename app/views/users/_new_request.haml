@@ -19,8 +19,42 @@
     %br/
     %br/
     Upload Prescription
+    %br/
+    %br/
     %input{type: "file", name: "prescription", :required => ""}
+    %br/
+
+    - if current_user.address.blank?
+      %h5 
+        Please add your address before continuing
+        %br/
+        Address
+        %input{type: "text", name: "address"}
+        %br/
+        %br/
     = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+
+- i = 1
+- if @requests.present?
+  %table.table#findashboard
+    %tr.fin_table_border
+      %th{style: "text-align: center;"} Request no
+      %th{style: "text-align: center;"} Medicine type
+      %th{style: "text-align: center;"} Medicine details
+      %th{style: "text-align: center;"} Prescrption
+
+    - @requests.each do |r|
+      %tr
+        %td
+          = i
+        %td
+          = Request::MEDICINE_TYPE_INVERT[r.medicine_type].to_s.camelize
+        %td
+          = r.medicine_detail
+        %td
+          = r.prescription_id
+
+      - i +=1
 
 
     
