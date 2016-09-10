@@ -39,4 +39,13 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  class ActionDispatch::Request
+    def remote_ip
+      "95.187.23.72" # ipd home (Denver,CO or Renton,WA)                                                                                                                                                                                                                                                                        
+      # "208.87.35.103" # websiteuk.com -- Nassau, Bahamas                                                                                                                                                                                                                                                                      
+      # "50.78.167.161" # HOL Seattle, WA                                                                                                                                                                                                                                                                                       
+    end
+  end
+
 end

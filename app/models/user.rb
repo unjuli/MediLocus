@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  geocoded_by :address
-	after_validation :geocode, if: Proc.new {|user| user.address.present? and user.address_changed? }
+  geocoded_by :current_sign_in_ip
+  after_validation :geocode
+
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
 end
