@@ -1,0 +1,13 @@
+{
+  "name": "MediLocus",
+  "short_name": "Medi",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [{
+     "src": "/assets/images/kitten.jpg",
+     "sizes": "192x192",
+     "type": "image/png"
+  }],
+  "gcm_sender_id": "429368311100",
+  "gcm_user_visible_only": true
+}

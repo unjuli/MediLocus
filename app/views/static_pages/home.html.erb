@@ -1,12 +1,34 @@
-<div class="center jumbotron">
-  <h1>Welcome to MediLocus</h1>
+<% if user_signed_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render template: 'users/index' %>
+      </section>
+    </aside>
+  </div>
+<% else %>
+  <body background="http://images.123hdwallpapers.com/20150705/pen-paper-handwriting-1920x1200.jpg">
 
-  <h2>
-    This is the home page for the MediLocus
-  </h2>
+  <div class="center jumbotron">
 
-  <%= link_to "Sign up now!", '/users/sign_up', class: "btn btn-lg btn-primary" %>
-</div>
+    <div class="welcome">
 
-<%= link_to image_tag("kitten.jpg", alt: "logo"),
-            'http://rubyonrails.org/' %>
+      <div id="logo">
+        <%= link_to image_tag("logo.png", alt: "MediLocus logo", height: "150", width: "150"), '#' %> 
+      </div>
+
+      <div id="welcome-text">
+
+        <h1> Welcome to MediLocus</h1>
+
+        <h2> <strong> This is the home page for the MediLocus </strong> </h2>
+
+        <h4>
+          Description
+        </h4>
+      </div>
+      <%= link_to "Sign Up - it's Free!", '/users/sign_up' , class: "btn btn-lg btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

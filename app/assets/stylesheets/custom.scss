@@ -112,3 +112,42 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
+
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #555;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+
+.container {
+  span {
+    color: white;
+    size: 50px;
+    font-family: serif;
+  }
+}
+
+.center {
+  text-align: center;
+  background-color: grey;
+  opacity: 0.8;
+
+  .welcome {
+    margin-top: -20px;
+    margin-bottom: 40px;
+    color: #000000;
+    font-family: serif;
+
+      #welcome-text {
+          margin-top: -30px;
+        font-family: 'Impact';
+      }     
+  }
+}

@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     center_point = [current_user.latitude, current_user.longitude]
     box = Geocoder::Calculations.bounding_box(center_point, distance)
     a = User.within_bounding_box(box)
+    binding.pry
     users = a.reject{|b| b.id == current_user.id}
     @list_of_users = users.map(&:id)
   end

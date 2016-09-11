@@ -18,4 +18,9 @@ Rails.application.routes.draw do
   get 'static_pages/home'
 
   get 'static_pages/help'
+  post "/subscribe" => "subscriptions#create"
+  post "/push" => "push#create"
+
+  post 'noti' => 'noti_authorisations#new', :as => 'setup_noti'
+  get 'noti/callback' => 'noti_authorisations#create', :as => 'noti_callback'
 end
