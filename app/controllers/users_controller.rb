@@ -58,6 +58,7 @@ class UsersController < ApplicationController
       1.day
     end
     Bidding.create(user_id: current_user.id, request_id: params["request"].to_i, amount: amount, delivery_time: delivery_time)
+    flash[:notice] = "Bidding details submitted successfully"
     redirect_to :action => 'index'
   end
 
@@ -83,10 +84,9 @@ class UsersController < ApplicationController
   def show_prescription
     r = Request.find_by_id "#{params["requestID"]["id"]}" if params["requestID"] && params["requestID"]["id"]
     if r.present?
-      @image = r.picture.url
-      redirect_to '/users/show_prescription'
+      render show_prescription_users_path(req: r.id)
     else
-      redirect_to :action => 'index'
+      redirect_to show_prescription_users_path
     end
   end
 end
