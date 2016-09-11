@@ -109,11 +109,14 @@ footer ul li {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+input {
   border: 1px solid #bbb;
-  width: 100%;
   margin-bottom: 15px;
   @include box_sizing(border-box);
+}
+
+textarea {
+  width: 100%;
 }
 
 .submit {
@@ -161,4 +164,12 @@ input {
         font-family: 'Impact';
       }     
   }
+}
+
+.alert-alert {
+  @extend .alert-warning;
+}
+
+.alert-success {
+  @extend .alert-success;
 }
