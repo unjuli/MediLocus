@@ -41,7 +41,7 @@
                   %br/
                   %input{type: "file", name: "prescription", :required => ""}
                   %br/
-                  %input{type: "checkbox", name: "hd_status", id: "hd_status", value: '0'}/
+                  %input{type: "checkbox", name: "hd_status", id: "hd_status"}
                   Home Delivery
                   %br/
                   %br/
@@ -81,6 +81,38 @@
           %form{:action => "/users/add_bidding_value", :method => "get"}
             %input{:type => "hidden", :name => "requested_by",:value => "#{r.user.id}"}
             %input{:type => "hidden", :name => "accepted_by",:value => "#{current_user.id}"}
-            %input{:type => "hidden", :name => "request",:value => "#{r.id}"}
-            %input.btn.btn-success.stop{:type => "submit", :value => "Approve"} 
+            / %input.request{:type => "hidden", :name => "request",:value => "#{r.id}"}
+            %button.btn.btn-success.btn-primary{"data-target" => "#myModal1", "data-toggle" => "modal", :type => "button", style: "float:right;"} Serve Request
       - i += 1
+
+
+      #myModal1.modal.fade{:role => "dialog"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"data-dismiss" => "modal", :type => "button"} ×
+              %h4.modal-title Enter Bid details
+            .modal-body
+              .row.size-16
+                = form_tag("/users/place_bid", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do
+                  %input{:type => "hidden", :name => "request",:value => "#{r.id}"}
+                  .col-xs-4.p-l10
+                    Cost of medicine
+                    %input{:type => "number", :name => "amount", :required => ""}
+                    %br/
+                    %br/
+                    Time you can deliver at
+                    %select{:name => "delivery_time", :placeholder => "enter type of medicine",:required => ""}
+                      %option{:value => ""}Select
+                      %option{:value => 1} < 15 mins
+                      %option{:value => 2} 15- 30 mins
+                      %option{:value => 3} 30 - 60 mins
+                      %option{:value => 4} 1 - 2 hours
+                      %option{:value => 5} > 2 hours
+
+                    %br/
+                    %br/
+                    = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+            .modal-footer
+              %button.btn.btn-primary{type: "button", "data-dismiss" => "modal"} Close
+          

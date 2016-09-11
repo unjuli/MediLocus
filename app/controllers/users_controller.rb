@@ -58,6 +58,7 @@ class UsersController < ApplicationController
       1.day
     end
     Bidding.create(user_id: current_user.id, request_id: params["request"].to_i, amount: amount, delivery_time: delivery_time)
+    flash[:notice] = "Bidding details submitted successfully"
     redirect_to :action => 'index'
   end
 
