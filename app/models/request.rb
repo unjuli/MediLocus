@@ -26,5 +26,6 @@ class Request < ActiveRecord::Base
     r.save!
     p.update(request_id: r.id)
     UserMailer.request_notification(current_user, r).deliver
+    r
   end
 end

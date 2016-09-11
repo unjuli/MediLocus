@@ -55,7 +55,7 @@ Rails.application.configure do
 
   class ActionDispatch::Request
     def remote_ip
-      "106.51.143.254" # ipd home (Denver,CO or Renton,WA)                                                                                                                                                                                                                                                                        
+      "171.79.33.78" # ipd home (Denver,CO or Renton,WA)                                                                                                                                                                                                                                                                        
       # "208.87.35.103" # websiteuk.com -- Nassau, Bahamas                                                                                                                                                                                                                                                                      
       # "50.78.167.161" # HOL Seattle, WA                                                                                                                                                                                                                                                                                       
     end
