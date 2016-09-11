@@ -1,0 +1,26 @@
+%h5
+  Bidding value
+  %br/
+  %br/
+
+  .row.size-16
+    = form_tag("/users/place_bid", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do  
+      %input{:type => "hidden", :name => "request",:value => params["request"]}
+      .col-xs-4.p-l10
+        Cost of medicine
+        %input{:type => "number", :name => "amount", :required => ""}
+        %br/
+        %br/
+        Time you can deliver at
+        %select{:name => "delivery_time", :placeholder => "enter type of medicine",:required => ""}
+          %option{:value => ""}Select
+          %option{:value => 1} < 15 mins
+          %option{:value => 2} 15- 30 mins
+          %option{:value => 3} 30 - 60 mins
+          %option{:value => 4} 1 - 2 hours
+          %option{:value => 5} > 2 hours
+
+        %br/
+        %br/
+        = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary', style: "width: 40%"
+        

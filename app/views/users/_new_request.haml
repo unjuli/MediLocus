@@ -69,7 +69,7 @@
           = (Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude], [r.user.latitude, r.user.longitude])).round(2)
           km away
         %td
-          %form{:action => "/users/accept_request", :method => "get"}
+          %form{:action => "/users/add_bidding_value", :method => "get"}
             %input{:type => "hidden", :name => "requested_by",:value => "#{r.user.id}"}
             %input{:type => "hidden", :name => "accepted_by",:value => "#{current_user.id}"}
             %input{:type => "hidden", :name => "request",:value => "#{r.id}"}

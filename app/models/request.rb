@@ -1,6 +1,9 @@
 class Request < ActiveRecord::Base
   belongs_to :user
   has_one :prescription
+  has_many :biddings
+
+  default_scope { where(solved: false)}
 
   MEDICINE_TYPE ={
     antibiotics: 1,
