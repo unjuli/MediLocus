@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	def index
     current_user.update(current_sign_in_ip: request.remote_ip) if current_user.address.blank?
     get_available_users_nearby
-    @requests = Request.where("user_id in (?) and solved = ?",@list_of_users,0)
+    @requests = Request.where("user_id in (?)",@list_of_users)
 	end
 
   def show
@@ -36,7 +36,10 @@ class UsersController < ApplicationController
   end
 
   def add_bidding_value
+  end
 
+  def applied_requests
+    @applied_requests = Request.where(user_id: current_user.id)
   end
 
   def place_bid
@@ -60,7 +63,11 @@ class UsersController < ApplicationController
   def biddings_available
     @biddings_available = []
     current_user.requests.each do |r|
-      @biddings_available << r.biddings if r.biddings.present?
+      if r.biddings.present?
+        r.biddings.each do |r1|
+          @biddings_available << r1
+        end
+      end
     end
   end
 
@@ -68,6 +75,7 @@ class UsersController < ApplicationController
     r = Request.find params["request"].to_i
     u = User.find params["solved_by"]
     r.update(solved: 1, solved_by: u.id)
+    UserMailer.accept_request_notification(current_user, u, r).deliver_now
     render :biddings_available
   end
 end

@@ -1,0 +1,19 @@
+- i = 1
+- if @applied_requests.present?
+  %table.table#findashboard
+    %tr.fin_table_border
+      %th{style: "text-align: center;"} SL. NO.
+      %th{style: "text-align: center;"} Medicine type 
+      %th{style: "text-align: center;"} Medicine detail
+
+    - @applied_requests.each do |a|
+      %tr
+        %td
+          = i
+        %td
+          = Request::MEDICINE_TYPE_INVERT[a.medicine_type].to_s.camelize
+        %td
+          = a.medicine_detail
+      - i += 1
+- else
+  %h3 No requests placed
