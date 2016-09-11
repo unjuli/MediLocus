@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get 'biddings_available' => 'users#biddings_available'
       get 'accept_bidding_value' => 'users#accept_bidding_value'
       get 'applied_requests' => 'users#applied_requests'
+      get 'show_prescription' => 'users#show_prescription'
     end
   end
 

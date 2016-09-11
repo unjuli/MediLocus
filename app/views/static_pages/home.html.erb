@@ -13,14 +13,22 @@
     <div class="welcome">
 
       <div id="logo">
-        <%= link_to image_tag("logo.png", alt: "MediLocus logo", height: "150", width: "150"), '#' %> 
+        <%= link_to image_tag("logo.png", alt: "MediLocus logo", height: "150", width: "150"), root_path %> 
       </div>
 
       <div id="welcome-text">
 
-        <h1> Welcome to MediLocus</h1>
+        <h1> <font color="blue">Welcome to MediLocus</font> </h1>
 
-        <h2> <strong> An exclusive P2P marketplace to buy and sell medicines; Anytime; Anywhere. </strong> </h2>
+        <h2> <strong> <font color="black">An exclusive P2P marketplace to buy and sell medicines; Anytime; Anywhere.</font> </strong> </h2>
+
+        <h4>
+          In urgent need of a medicine and the local chemists are all closed? Fret no more, as we are here!!
+          Just put in a request for it on our platform, and sit back and wait as the local chemists queues up to deliver it to you. Choose the chemist you want.
+          <br>
+            What's more? Have some medicines, requested by someone in your neighbourhood? Help them get it, sooner than the chemist arrives.
+          </br>
+        </h4>
       </div>
       <%= link_to "Sign Up - it's Free!", '/users/sign_up' , class: "btn btn-lg btn-primary" %>
     </div>
