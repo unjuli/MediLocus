@@ -12,4 +12,7 @@ class User < ActiveRecord::Base
     user: 1,
     chemist: 2
   }
+
+  has_many :biddings
+  has_many :requests
 end
