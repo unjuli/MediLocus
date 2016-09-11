@@ -18,6 +18,7 @@ class Request < ActiveRecord::Base
     r = Request.create(user_id: current_user.id, medicine_type: params["medicine"], medicine_detail: params["details"])
     p.update(request_id: r.id)
     r.update(prescription_id: p.id)
-    UserMailer.request_notification(current_user, r).deliver
+    r
+    # UserMailer.request_notification(current_user, r).deliver
   end
 end
