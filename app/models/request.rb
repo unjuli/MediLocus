@@ -5,6 +5,8 @@ class Request < ActiveRecord::Base
 
   default_scope { where(solved: false)}
 
+  mount_uploader :picture, PictureUploader
+
   MEDICINE_TYPE ={
     antibiotics: 1,
     pathogens: 2,
@@ -18,10 +20,11 @@ class Request < ActiveRecord::Base
   def self.add_new_request(params, current_user)
     file = params["prescription"].tempfile
     p = Prescription.create(user_id: current_user.id, file_name: file)
-    r = Request.create(user_id: current_user.id, medicine_type: params["medicine"], medicine_detail: params["details"])
+    r = Request.new(user_id: current_user.id, medicine_type: params["medicine"], medicine_detail: params["details"])
+    r.prescription_id =  p.id
+    r.picture = params[:prescription]
+    r.save!
     p.update(request_id: r.id)
-    r.update(prescription_id: p.id)
-    r
-    # UserMailer.request_notification(current_user, r).deliver
+    UserMailer.request_notification(current_user, r).deliver
   end
 end

@@ -57,7 +57,7 @@
       %th{style: "text-align: center;"} Request no
       %th{style: "text-align: center;"} Medicine type
       %th{style: "text-align: center;"} Medicine details
-      %th{style: "text-align: center;"} Prescrption
+      %th{style: "text-align: center;"} Prescription
       %th{style: "text-align: center;"} User
       %th{style: "text-align: center;"} Distance 
       %th{style: "text-align: center;"} Action
@@ -71,7 +71,11 @@
         %td
           = r.medicine_detail
         %td
-          = r.prescription_id
+          - if r.picture?
+            // = link_to image_tag({:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42"}), :class=>'action', :onclick=>"showImage();return false;", :height => "42", :width => "42"
+            %img{:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42", :onclick => "showImage(#{r.id});return false;"}
+          - else
+            -
         %td
           = r.user.name
         %td
@@ -84,3 +88,19 @@
             %input{:type => "hidden", :name => "request",:value => "#{r.id}"}
             %input.btn.btn-success.stop{:type => "submit", :value => "Approve"} 
       - i += 1
+
+:javascript
+  function showImage(request_id) {
+    var datum = {'id' : request_id}
+    $.ajax({
+      type: 'GET',
+      url: '/users/show_prescription',
+      data : {requestID: datum}
+    })
+
+    var auto = setTimeout(function(){ submitRedirect(); }, 300);
+     function submitRedirect() {
+         clearTimeout(auto);
+         location.reload();
+     }
+  }

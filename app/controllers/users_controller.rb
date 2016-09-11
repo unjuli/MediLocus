@@ -78,5 +78,14 @@ class UsersController < ApplicationController
     r.update(solved: 1, solved_by: u.id)
     UserMailer.accept_request_notification(current_user, u, r).deliver_now
     render :biddings_available
+
+  def show_prescription
+    r = Request.find_by_id "#{params["requestID"]["id"]}" if params["requestID"] && params["requestID"]["id"]
+    if r.present?
+      @image = r.picture.url
+      redirect_to '/users/show_prescription'
+    else
+      redirect_to :action => 'index'
+    end
   end
 end
