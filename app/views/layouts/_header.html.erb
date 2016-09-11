@@ -7,11 +7,10 @@
     
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   '/users' %></li>
-        <li><%= link_to "Help",   'help_path' %></li>
+        <li><%= link_to "Dashboard",   '/users' %></li>
+        <li><%= link_to "Help",   '#' %></li>
 
         <% if user_signed_in? %>
-          <li><%= link_to "Users", users_path %></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: "delete" %></li>
         <% else %>
           <li><%= link_to "Login", new_user_session_path %></li>

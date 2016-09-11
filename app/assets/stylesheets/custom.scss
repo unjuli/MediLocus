@@ -42,7 +42,8 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  font-family: serif;
+  color: black;
 }
 
 p {
@@ -71,11 +72,17 @@ p {
 
 /* footer */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
+footer{
+    position:fixed;
+    height:50px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #777;
+    border-top: 1px solid #eaeaea;
 }
 
 footer a {
@@ -107,6 +114,10 @@ input, textarea, select, .uneditable-input {
   width: 100%;
   margin-bottom: 15px;
   @include box_sizing(border-box);
+}
+
+.submit {
+  width: 50%;
 }
 
 input {

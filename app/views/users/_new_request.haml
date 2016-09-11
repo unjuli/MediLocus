@@ -1,45 +1,52 @@
-%h5
-  New Request
+%head
+  %link{:href => "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", :rel => "stylesheet"}/
+  %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+  %script{:src => "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+%body
   %br/
-  .row
-    .col-md-6.col-md-offset-3
-      %br/
-      = form_tag("/users/new_request", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
-        Type of medicine
-        %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
-          %option{:value => ""}Select
-          %option{:value => 1} Antibiotics
-          %option{:value => 2} Pathogens
-          %option{:value => 3} Antipyretics
-          %option{:value => 4} Analgesics
-          %option{:value => 5} Tranquilizer
-          %option{:value => 6} Antiseptics
-        %br/
-        %br/
-        More details 
-        %textarea{:cols => "50", :rows => "4", :name => "details"}
-          :preserve
-        %br/
-        %br/
-        Upload Prescription
-        %br/
-        %br/
-        %input{type: "file", name: "prescription", :required => ""}
-        %br/
+  .container
+    %button.btn.btn-info.btn-primary{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button", style: "float:right;"} + Add Request
+    %br/
+    %br/
+    %br/
+    #myModal.modal.fade{:role => "dialog"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"} ×
+            %h4.modal-title New Request
+          .modal-body
+            .row
+              .col-md-6.col-md-offset-3
+                %br/
+                = form_tag("/users/new_request", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
+                  Type of medicine
+                  %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
+                    %option{:value => ""} Select
+                    %option{:value => 1} Antibiotics
+                    %option{:value => 2} Pathogens
+                    %option{:value => 3} Antipyretics
+                    %option{:value => 4} Analgesics
+                    %option{:value => 5} Tranquilizer
+                    %option{:value => 6} Antiseptics
+                  %br/
+                  %br/
+                  More details 
+                  %textarea{:cols => "50", :rows => "4", :name => "details"}
+                    :preserve
+                  %br/
+                  %br/
+                  Upload Prescription
+                  %br/
+                  %br/
+                  %input{type: "file", name: "prescription", :required => ""}
+                  %br/
 
-        / - if current_user.address.blank?
-        /   %h5 
-        /     Please add your address before continuing
-        /     %br/
-        /     Address
-        /     %input{type: "text", name: "address"}
-        /     %br/
-        /     %br/
-        = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
-
-    %br
-    %br
-    %br
+                  = check_box_tag 'receive_email', 'yes', true
+                  = submit_tag "Confirm", data: { disable_with: "Please wait..." }, class: "btn btn-danger"
+          .modal-footer
+            %button.btn.btn-primary{type: "button", "data-dismiss" => "modal"} Close
+            
 
 - i = 1
 - if @requests.present?
@@ -74,10 +81,4 @@
             %input{:type => "hidden", :name => "accepted_by",:value => "#{current_user.id}"}
             %input{:type => "hidden", :name => "request",:value => "#{r.id}"}
             %input.btn.btn-success.stop{:type => "submit", :value => "Approve"} 
-        
-          / %form{:action => "/", :method => "post"}
-          /   %input{:type => "hidden", :name => "status",:value => "reject"}
-          /   %input.btn.btn-danger.stop{:type => "submit", :value => "Reject"}
       - i += 1
-
-    
