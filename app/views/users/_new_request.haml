@@ -73,7 +73,9 @@
         %td
           - if r.picture?
             // = link_to image_tag({:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42"}), :class=>'action', :onclick=>"showImage();return false;", :height => "42", :width => "42"
-            %img{:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42", :onclick => "showImage(#{r.id});return false;"}
+            %img{:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42", :onclick => "showImage(#{r.id});"}
+            .input.url{"type" => "hidden", "id" => "url_#{r.id}", "value" => "#{r.picture.url}", "name" => "any"}
+
           - else
             -
         %td
@@ -120,17 +122,9 @@
               %button.btn.btn-primary{type: "button", "data-dismiss" => "modal"} Close
           
 :javascript
-  function showImage(request_id) {
-    var datum = {'id' : request_id}
-    $.ajax({
-      type: 'GET',
-      url: '/users/show_prescription',
-      data : {requestID: datum}
-    })
-
-    var auto = setTimeout(function(){ submitRedirect(); }, 300);
-     function submitRedirect() {
-         clearTimeout(auto);
-         location.reload();
-     }
+  function showImage(id) {
+    s = document.getElementById('url_' + id);
+    url = s.getAttribute('value')
+    var win = window.open(url, '_blank');
+    win.focus();
   }
