@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     users = get_available_users_nearby
     users.first.each do |u|
       UserMailer.request_notification(u,request_added).deliver_now
+      break
     end
     flash[:notice] = "Request submitted and broadcasted successfully"
     redirect_to :action => 'index'
