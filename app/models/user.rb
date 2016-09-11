@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+
+  ROLE_ENUM = {
+    user: 1,
+    chemist: 2
+  }
 end

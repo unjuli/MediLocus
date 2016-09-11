@@ -2,11 +2,15 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-    get_available_users
+    get_available_users_nearby
     @requests = Request.where("user_id in (?) ",@list_of_users)
 	end
 
-  def get_available_users
+  def show
+    render :index  
+  end
+
+  def get_available_users_nearby
     distance = 1000
     center_point = [current_user.latitude, current_user.longitude]
     box = Geocoder::Calculations.bounding_box(center_point, distance)
@@ -17,9 +21,8 @@ class UsersController < ApplicationController
 
   def new_request
     current_user.update(current_sign_in_ip: request.remote_ip) if current_user.address.blank?
-    
     # add_address if params["address"].present?
-    # request_added = Request.add_new_request(params, current_user)
+    request_added = Request.add_new_request(params, current_user)
     redirect_to :action => 'index'
   end
 

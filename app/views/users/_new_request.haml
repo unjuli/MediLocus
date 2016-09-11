@@ -17,7 +17,7 @@
         %br/
         %br/
         More details 
-        %textarea{:cols => "50", :rows => "4"}
+        %textarea{:cols => "50", :rows => "4", :name => "details"}
           :preserve
         %br/
         %br/
@@ -27,14 +27,14 @@
         %input{type: "file", name: "prescription", :required => ""}
         %br/
 
-        - if current_user.address.blank?
-          %h5 
-            Please add your address before continuing
-            %br/
-            Address
-            %input{type: "text", name: "address"}
-            %br/
-            %br/
+        / - if current_user.address.blank?
+        /   %h5 
+        /     Please add your address before continuing
+        /     %br/
+        /     Address
+        /     %input{type: "text", name: "address"}
+        /     %br/
+        /     %br/
         = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
 
     %br

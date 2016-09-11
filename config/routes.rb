@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
 
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
 
   # root :to => 'users#index'
   resources :users do
