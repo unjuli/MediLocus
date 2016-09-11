@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     center_point = [current_user.latitude, current_user.longitude]
     box = Geocoder::Calculations.bounding_box(center_point, distance)
     a = User.within_bounding_box(box)
+    binding.pry
     users = a.reject{|b| b.id == current_user.id}
     @list_of_users = users.map(&:id)
   end
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     current_user.update(current_sign_in_ip: request.remote_ip) if current_user.address.blank?
     
     # add_address if params["address"].present?
-    # request_added = Request.add_new_request(params, current_user)
+    request_added = Request.add_new_request(params, current_user)
     redirect_to :action => 'index'
   end
 

@@ -81,6 +81,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    hkdf (0.2.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -109,6 +110,8 @@ GEM
     mysql2 (0.4.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    noti (1.0.2)
+      json
     orm_adapter (0.5.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -185,8 +188,11 @@ GEM
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
+      hkdf (~> 0.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webpush (0.2.4)
+      hkdf (~> 0.2)
 
 PLATFORMS
   ruby
@@ -202,6 +208,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mysql2
+  noti
   pry
   rails (= 4.2.5.2)
   sass-rails (~> 5.0)
@@ -211,6 +218,7 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+  webpush (~> 0.2.3)
 
 BUNDLED WITH
    1.13.0
