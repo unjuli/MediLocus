@@ -5,6 +5,16 @@ class User < ActiveRecord::Base
   geocoded_by :current_sign_in_ip
   after_validation :geocode
 
+  has_many :requests
+
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+
+  ROLE_ENUM = {
+    user: 1,
+    chemist: 2
+  }
+
+  has_many :biddings
+  has_many :requests
 end

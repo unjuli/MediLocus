@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h4> Hi <%= @current_user.name %>, </h4>
+    <p>You will now get your medicine for <%= Request::MEDICINE_TYPE_INVERT[@request.medicine_type] %> from <%= @user.name %></p>
+    <p>Your medicine details were: <%= @request.medicine_detail%></p>
+    <p>You may now contact him at: <%= @user.phone %></p>
+  </body>
+</html>

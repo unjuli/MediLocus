@@ -4,7 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New medical request in your vicinity</h1>
-    <p>Thanks for joining and have a great day! <%= @request.medicine_detail%></p>
+    <p>Thanks for joining and have a great day!
+    Your medicine details are: </p>
+    <b>Category: </b>
+    <%= Request::MEDICINE_TYPE_INVERT[@request_added.medicine_type]%>
+    <br>
+    <b>Details:</b>
+    <%= @request_added.medicine_detail%>
   </body>
 </html>

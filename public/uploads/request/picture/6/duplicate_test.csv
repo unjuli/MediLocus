@@ -1,0 +1,11 @@
+Merchant Name,Payment Gateway,Payment Mode,Transaction Type,Request Date,Transaction Key,PG Reference ID,Total Amount,MDR,Service Tax,Settlement Amount,Status,Settlement Date
+zoomcar,PayU,PAYU / PAISA,capture,27/09/15 23:57,ljlb3otkj,0,16780,281.9,39.47,16458.63,success,29/09/15
+zoomcar,PayU,PAYU / PAISA,capture,27/09/15 23:57,ljlb3otkj,0,16780,281.9,39.47,16458.63,success,29/09/15
+Zoomcar,PayU,PAYU / PAISA,capture,27/09/15 23:57,ljlb3otkj,0,16780,281.9,39.47,16458.63,success,29/09/15
+Zoomcar India,PayU,PAYU / PAISA,capture,27/09/15 23:57,ljlb3otkj,0,16780,281.9,39.47,16458.63,success,29/09/15
+Zoomcar India,PayU,PAYU / PAISA,capture,27/09/15 23:55,ljlb3oto6,0,13175,131.75,18.45,13024.8,success,29/09/15
+Tinyowl,PayU,PAYU / PAISA,auth,27/09/15 23:55,ljlb3oto6,0,13175,131.75,18.45,13024.8,success,-
+zoom,PayU,PAYU / PAISA,capture,27/09/15 23:55,ljlb3oto2,0,4410,74.09,10.37,4325.54,success,29/09/15
+zoom,PayU,PAYU / PAISA,auth,27/09/15 23:55,ljlb3oto2,0,4410,74.09,10.37,4325.54,success,-
+zoom,PayU,PAYU / PAISA,capture,27/09/15 23:54,ljlb3otoa,0,19,0.32,0.04,18.64,success,29/09/15
+zoom,PayU,PAYU / PAISA,auth,27/09/15 23:54,ljlb3otoa,0,19,0.32,0.04,18.64,success,-

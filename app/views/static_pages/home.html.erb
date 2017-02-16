@@ -1,34 +1,38 @@
-<% if user_signed_in? %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <%= render template: 'users/index' %>
-      </section>
-    </aside>
-  </div>
-<% else %>
-  <body background="http://images.123hdwallpapers.com/20150705/pen-paper-handwriting-1920x1200.jpg">
-
-  <div class="center jumbotron">
-
-    <div class="welcome">
-
-      <div id="logo">
-        <%= link_to image_tag("logo.png", alt: "MediLocus logo", height: "150", width: "150"), '#' %> 
-      </div>
-
-      <div id="welcome-text">
-
-        <h1> Welcome to MediLocus</h1>
-
-        <h2> <strong> This is the home page for the MediLocus </strong> </h2>
-
-        <h4>
-          Description
-        </h4>
-      </div>
-      <%= link_to "Sign Up - it's Free!", '/users/sign_up' , class: "btn btn-lg btn-primary" %>
+<body background="http://localhost:3000/uploads/request/picture/16/wpm.jpg">
+  <% if user_signed_in? %>
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <%= render template: 'users/index' %>
+        </section>
+      </aside>
     </div>
+  <% else %>
 
-  </div>
-<% end %>
+    <div class="center jumbotron">
+      <div class="welcome">
+
+        <div id="logo">
+          <%= link_to image_tag("logo.png", alt: "MediLocus logo", height: "150", width: "150"), root_path %> 
+        </div>
+
+        <div id="welcome-text">
+
+        <h1> <font color="black">Welcome to MediLocus</font> </h1>
+
+          <h2> <strong> <font color="black">An exclusive P2P marketplace to buy and sell medicines; Anytime; Anywhere.</font> </strong> </h2>
+
+          <h4>
+            In urgent need of a medicine and the local chemists are all closed? Fret no more, as we are here!!
+            Just put in a request for it on our platform, and sit back and wait as the local chemists queues up to deliver it to you. Choose the chemist you want.
+            <br>
+              What's more? Have some medicines, requested by someone in your neighbourhood? Help them get it, sooner than the chemist arrives.
+            </br>
+          </h4>
+        </div>
+        <%= link_to "Sign Up - it's Free!", '/users/sign_up' , class: "btn btn-lg btn-primary" %>
+      </div>
+
+    </div>
+  <% end %>
+</body>

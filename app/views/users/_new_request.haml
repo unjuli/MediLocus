@@ -1,45 +1,54 @@
-%h5
-  New Request
+%head
+  %link{:href => "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", :rel => "stylesheet"}/
+  %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+  %script{:src => "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+%body
   %br/
-  .row
-    .col-md-6.col-md-offset-3
-      %br/
-      = form_tag("/users/new_request", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
-        Type of medicine
-        %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
-          %option{:value => ""}Select
-          %option{:value => 1} Antibiotics
-          %option{:value => 2} Pathogens
-          %option{:value => 3} Antipyretics
-          %option{:value => 4} Analgesics
-          %option{:value => 5} Tranquilizer
-          %option{:value => 6} Antiseptics
-        %br/
-        %br/
-        More details 
-        %textarea{:cols => "50", :rows => "4"}
-          :preserve
-        %br/
-        %br/
-        Upload Prescription
-        %br/
-        %br/
-        %input{type: "file", name: "prescription", :required => ""}
-        %br/
-
-        - if current_user.address.blank?
-          %h5 
-            Please add your address before continuing
-            %br/
-            Address
-            %input{type: "text", name: "address"}
-            %br/
-            %br/
-        = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
-
-    %br
-    %br
-    %br
+  .container
+    %button.btn.btn-info.btn-primary{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button", style: "float:right;"} + Add Request
+    %br/
+    %br/
+    %br/
+    #myModal.modal.fade{:role => "dialog"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"} ×
+            %h4.modal-title New Request
+          .modal-body
+            .row
+              .col-md-6.col-md-offset-3
+                %br/
+                = form_tag("/users/new_request", method:'post', class: 'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do    
+                  Type of medicine
+                  %select{:name => "medicine", :placeholder => "enter type of medicine",:required => ""}
+                    %option{:value => ""} Select
+                    %option{:value => 1} Antibiotics
+                    %option{:value => 2} Pathogens
+                    %option{:value => 3} Antipyretics
+                    %option{:value => 4} Analgesics
+                    %option{:value => 5} Tranquilizer
+                    %option{:value => 6} Antiseptics
+                  %br/
+                  %br/
+                  More details 
+                  %textarea{:cols => "50", :rows => "4", :name => "details"}
+                    :preserve
+                  %br/
+                  %br/
+                  Upload Prescription
+                  %br/
+                  %br/
+                  %input{type: "file", name: "prescription", :required => ""}
+                  %br/
+                  %input{type: "checkbox", name: "hd_status", id: "hd_status"}
+                  Home Delivery
+                  %br/
+                  %br/
+                  = submit_tag "Confirm", data: { disable_with: "Please wait..." }, class: "btn btn-danger"
+          .modal-footer
+            %button.btn.btn-primary{type: "button", "data-dismiss" => "modal"} Close
+            
 
 - i = 1
 - if @requests.present?
@@ -48,7 +57,7 @@
       %th{style: "text-align: center;"} Request no
       %th{style: "text-align: center;"} Medicine type
       %th{style: "text-align: center;"} Medicine details
-      %th{style: "text-align: center;"} Prescrption
+      %th{style: "text-align: center;"} Prescription
       %th{style: "text-align: center;"} User
       %th{style: "text-align: center;"} Distance 
       %th{style: "text-align: center;"} Action
@@ -62,20 +71,60 @@
         %td
           = r.medicine_detail
         %td
-          = r.prescription_id
+          - if r.picture?
+            // = link_to image_tag({:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42"}), :class=>'action', :onclick=>"showImage();return false;", :height => "42", :width => "42"
+            %img{:alt => "prescription", :height => "42", :src => "#{r.picture.url}", :width => "42", :onclick => "showImage(#{r.id});"}
+            .input.url{"type" => "hidden", "id" => "url_#{r.id}", "value" => "#{r.picture.url}", "name" => "any"}
+
+          - else
+            -
         %td
           = r.user.name
         %td
           = (Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude], [r.user.latitude, r.user.longitude])).round(2)
           km away
         %td
-          %form{:action => "/", :method => "get"}
-            %input{:type => "hidden", :name => "status",:value => "approve"}
-            %input.btn.btn-success.stop{:type => "submit", :value => "Approve"} 
-        
-          %form{:action => "/", :method => "post"}
-            %input{:type => "hidden", :name => "status",:value => "reject"}
-            %input.btn.btn-danger.stop{:type => "submit", :value => "Reject"}
+          %form{:action => "/users/add_bidding_value", :method => "get"}
+            %input{:type => "hidden", :name => "requested_by",:value => "#{r.user.id}"}
+            %input{:type => "hidden", :name => "accepted_by",:value => "#{current_user.id}"}
+            / %input.request{:type => "hidden", :name => "request",:value => "#{r.id}"}
+            %button.btn.btn-success.btn-primary{"data-target" => "#myModal1", "data-toggle" => "modal", :type => "button", style: "float:right;"} Serve Request
       - i += 1
 
-    
+      #myModal1.modal.fade{:role => "dialog"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"data-dismiss" => "modal", :type => "button"} ×
+              %h4.modal-title Enter Bid details
+            .modal-body
+              .row.size-16
+                = form_tag("/users/place_bid", method:'post', class:'form-inline', role:"form", id: "mediLocus", enctype: "multipart/form-data") do
+                  %input{:type => "hidden", :name => "request",:value => "#{r.id}"}
+                  .col-xs-4.p-l10
+                    Cost of medicine
+                    %input{:type => "number", :name => "amount", :required => ""}
+                    %br/
+                    %br/
+                    Time you can deliver at
+                    %select{:name => "delivery_time", :placeholder => "enter type of medicine",:required => ""}
+                      %option{:value => ""}Select
+                      %option{:value => 1} < 15 mins
+                      %option{:value => 2} 15- 30 mins
+                      %option{:value => 3} 30 - 60 mins
+                      %option{:value => 4} 1 - 2 hours
+                      %option{:value => 5} > 2 hours
+
+                    %br/
+                    %br/
+                    = submit_tag 'Submit', data: { disable_with: "Please wait..." }, class: 'btn btn-primary'
+            .modal-footer
+              %button.btn.btn-primary{type: "button", "data-dismiss" => "modal"} Close
+          
+:javascript
+  function showImage(id) {
+    s = document.getElementById('url_' + id);
+    url = s.getAttribute('value')
+    var win = window.open(url, '_blank');
+    win.focus();
+  }

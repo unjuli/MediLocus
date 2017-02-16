@@ -42,7 +42,8 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  font-family: serif;
+  color: black;
 }
 
 p {
@@ -71,11 +72,17 @@ p {
 
 /* footer */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
+footer{
+    position:fixed;
+    height:50px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #777;
+    border-top: 1px solid #eaeaea;
 }
 
 footer a {
@@ -102,11 +109,18 @@ footer ul li {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+input {
   border: 1px solid #bbb;
-  width: 100%;
   margin-bottom: 15px;
   @include box_sizing(border-box);
+}
+
+textarea {
+  width: 100%;
+}
+
+.submit {
+  width: 50%;
 }
 
 input {
@@ -136,7 +150,7 @@ input {
 
 .center {
   text-align: center;
-  background-color: grey;
+  background-color: darkgrey;
   opacity: 0.8;
 
   .welcome {
@@ -150,4 +164,12 @@ input {
         font-family: 'Impact';
       }     
   }
+}
+
+.alert-alert {
+  @extend .alert-warning;
+}
+
+.alert-success {
+  @extend .alert-success;
 }
